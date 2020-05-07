@@ -6,3 +6,5 @@ velocità in km/s
 angoli in rad
 
 belotti puzza
+
+frankie puzza di più
