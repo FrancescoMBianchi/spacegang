@@ -1,4 +1,4 @@
-function [vector_e,e,a,omega,i,w,teta,vector_h,vector_n] = obital_paraparameters(vector_r0,vector_v0)
+function [vector_e,e,a,omega,i,w,teta,vector_h,vector_n] = parametri_rv(vector_r0,vector_v0)
 % dati posizione e velocità iniziale calcolo parametri orbita
 % vector_e: vettore eccentricità
 % e: eccentricità
