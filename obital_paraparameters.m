@@ -1,4 +1,4 @@
-function [vector_e,e,a,omega,i,w,teta,vector_h,vector_n] = obital_paraparameters(vector_r0,vector_v0,mu)
+function [vector_e,e,a,omega,i,w,teta,vector_h,vector_n] = obital_paraparameters(vector_r0,vector_v0)
 % dati posizione e velocità iniziale calcolo parametri orbita
 % vector_e: vettore eccentricità
 % e: eccentricità
@@ -12,6 +12,8 @@ function [vector_e,e,a,omega,i,w,teta,vector_h,vector_n] = obital_paraparameters
 % vector_r0: vettore posizione iniziale
 % vector_v0: vettore velocità iniziale
 % mu: cost. gravitazione specifica di un oggetto celeste
+
+mu=398600;
 
 r0=norm(vector_r0);
 
