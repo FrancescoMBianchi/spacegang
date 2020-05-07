@@ -1,17 +1,17 @@
 close all
 clear all
-a=12610,0;
-e=0,2656;
-i=1,0430;
-omega=1,8790;
-w=2,4080;
+a=12610.0;
+e=0.2656;
+i=1.0430;
+omega=1.8790;
+w=2.4080;
 Re = 6.37e6; %raggio della terra
 figure(1);
 [x,y,z] = sphere(50); %crea tre matrici N+1 * N+1
 s = surf(Re*x/1e3,Re*y/1e3,Re*z/1e3); % create a sphere
 axis equal
 hold on
-p=a(1-e^2); 
+p=a*(1-e^2); 
 
 R= [   cos(omega)*cos(w) - sin(omega)*cos(i)*sin(w), sin(omega)*cos(w) + cos(omega)*cos(i)*sin(w), sin(i)*sin(w);
     - cos(omega)*sin(w) - sin(omega)*cos(i)*cos(w), cos(omega)*cos(i)*cos(w) - sin(omega)*sin(w), cos(w)*sin(i);
