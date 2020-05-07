@@ -7,8 +7,8 @@ function [vector_e,e,a,omega,i,w,teta,vector_h,vector_n] = obital_paraparameters
 % i: inclinazione [rad]
 % w: anomalia pericentro [rad]
 % teta: anomalia reale [rad]
-% vector_h: vettore qt. moto
-% vector_n: versore linea dei nodi [km^2/s]
+% vector_h: vettore qt. moto [km^2/s]
+% vector_n: versore linea dei nodi 
 % vector_r0: vettore posizione iniziale [km]
 % vector_v0: vettore velocità iniziale [km/s]
 % mu: cost. gravitazione specifica di un oggetto celeste [km^3/s^2]
