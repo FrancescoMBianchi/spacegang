@@ -1,7 +1,7 @@
 function [vector_e,e,a,omega,i,w,teta,vector_h,vector_n] = obital_paraparameters(vector_r0,vector_v0,mu)
-% dati posizione e velocità iniziale calcolo parametri orbita
-% vector_e: vettore eccentricità
-% e: eccentricità
+% dati posizione e velocitÃ  iniziale calcolo parametri orbita
+% vector_e: vettore eccentricitÃ 
+% e: eccentricitÃ 
 % a: semiasse maggiore
 % omega: ascensione retta del nodo ascendente
 % i: inclinazione
@@ -10,7 +10,7 @@ function [vector_e,e,a,omega,i,w,teta,vector_h,vector_n] = obital_paraparameters
 % vector_h: vettore qt. moto
 % vector_n: versore linea dei nodi
 % vector_r0: vettore posizione iniziale
-% vector_v0: vettore velocità iniziale
+% vector_v0: vettore velocitÃ  iniziale
 % mu: cost. gravitazione specifica di un oggetto celeste
 
 r0=norm(vector_r0);
@@ -48,7 +48,7 @@ else
     w=2*pi-acos((vector_e*(vector_n)')/(e*norm(vector_n)));
 end
 w=w*180/pi;
-
+%prova
 if vector_r0.*vector_v0>0
     
     teta=acos(vector_e*(vector_r0)'/(e*r0));
