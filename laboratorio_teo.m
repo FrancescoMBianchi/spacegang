@@ -1,15 +1,15 @@
 %% MANOVRA ORBITALE DI UNO SPACECRAFT DA UN ORBITA INIZIALE AD UN ORBITA FINALE
 clc
 clear
-% Dell'orbita iniziale (1) conosciamo vettore posizione e velocit‡ nel
+% Dell'orbita iniziale (1) conosciamo vettore posizione e velocit√† nel
 % sistema equatoriale celeste; dobbiamo ricavare i parametri orbitali per
 % caratterizzare l'orbita.
 % Dell'orbita finale (2) conosciamo i parametri orbitali; vogliamo ricavare
-% i vettori posizione e velocit‡ nel sistema equatoriale celeste.
+% i vettori posizione e velocit√† nel sistema equatoriale celeste.
 
 %% nomenclatura
-% vector_e: vettore eccentricit‡
-% e: eccentricit‡
+% vector_e: vettore eccentricit√†
+% e: eccentricit√†
 % a: semiasse maggiore [km]
 % omega: ascensione retta del nodo ascendente [rad]
 % i: inclinazione [rad]
@@ -18,7 +18,7 @@ clear
 % vector_h: vettore qt. moto [km^2/s]
 % vector_n: versore linea dei nodi
 % vector_r0: vettore posizione in teta [km]
-% vector_v0: vettore velocit‡ in teta [km/s]
+% vector_v0: vettore velocit√† in teta [km/s]
 % mu: cost. gravitazione specifica di un oggetto celeste [km^3/s^2]
 % l'indice 1 o 2 indica l'appartenenza rispettamente all'orbita 1 e 2
 
@@ -76,7 +76,7 @@ hold on
 plot3(X_1,Y_1,Z_1);
 plot3(X_2,Y_2,Z_2);
 [x,y,z] = sphere(50); %crea tre matrici N+1 * N+1
-s = surf(Re*x,Re*y,Re*z); % crea sfera con R=Re
+s = surf(Rt*x,Rt*y,Rt*z); % crea sfera con R=Rt
 axis equal
 
 
