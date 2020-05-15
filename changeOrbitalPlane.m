@@ -1,11 +1,11 @@
 function[deltav1,w_f,teta_f] = changeOrbitalPlane(ai,ei,ii,omegai,wi,i_f,omegaf)
-delta_omega=omegaf-omegai; %var delta inziallizzate
+delta_omega=omegaf-omegai; %var delta inizializzate
 delta_i=i_f-ii;
 mu=398600; %cost, andrebbe messa come var globale (!)
 p=ai*(1-ei^2);
 
 alpha=acos(cos(ii)*cos(i_f)+sin(ii)*sin(i_f)*cos(delta_omega)) %def angolo alpha
-sinu1=sin(delta_omega)*sin(i_f)/sin(alpha); %Queste formule sono uguali per ogni possibile caso di delta_i e delta_omega (così come alpha)
+sinu1=sin(delta_omega)*sin(i_f)/sin(alpha); %Queste formule sono uguali per ogni possibile caso di delta_i e delta_omega (cosÃ¬ come alpha)
 sinu2=sin(delta_omega)*sin(ii)/sin(alpha);
 
 if delta_i>0 %formule del cos(u) dipendono da segno di delta_i
