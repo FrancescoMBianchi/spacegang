@@ -23,7 +23,8 @@ vorb3(2,:)=sqrt(mu/p)*[-sin(thetaorb3(2));ei+cos(thetaorb3(2))];
 
 %calcolo dei deltav (due casi) 
 %riporto le velocità dell'orbita 2 nel sistema di riferimento perifocale 3
-R=[cos(deltaomega/2),sin(deltaomega/2);-sin(deltaomega/2),cos(deltaomega/2)]';
+R=[cos(deltaomega),sin(deltaomega);-sin(deltaomega),cos(deltaomega)]';
+
 vorb2(1,:)=R*(vorb2(1,:))';
 vorb2(2,:)=R*(vorb2(2,:))';
 deltav2(1)=norm(vorb2(1,:)-vorb3(1,:));
