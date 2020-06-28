@@ -1,6 +1,6 @@
 function [deltav2,omega3,theta3] = changePeriapsisArg(ai,ei,omega2,theta2,omegaf);
 
-if abs(omegaf-omega2)>pi/2    %condizione da correggere  
+if abs(omegaf-omega2)>pi/2 && abs(omegaf-omega2)<3/2*pi    
     omega3=omegaf+pi;
 else
 omega3=omegaf;
