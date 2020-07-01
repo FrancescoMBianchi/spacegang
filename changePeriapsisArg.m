@@ -1,4 +1,4 @@
-function [deltav2,omega3,theta3] = changePeriapsisArg(ai,ei,omega2,theta2,omegaf);
+function [deltav2,omega3,theta3,deltat12] = changePeriapsisArg(ai,ei,omega2,theta2,omegaf);
 
 if abs(omegaf-omega2)>pi/2 && abs(omegaf-omega2)<3/2*pi    
     omega3=omegaf+pi;
@@ -18,11 +18,8 @@ thetaorb3(2)=pi-deltaomega/2;
 %calcolo deltav
 deltav2=2*sqrt(mu/p)*ei*sin(deltaomega/2);
 
-%calcolo anomalia vera dell'orbita 3 (due casi)  
-%da aggiungere condizione del deltat per la scelta di uno o l'altro punto
-%di intersezione
-
-theta3(1)=thetaorb3(1);
-theta3(2)=thetaorb3(2);
+%calcolo tempi associati all'intersezione scelta
+deltat12(1)=timeOfFlight(ai,ei,theta2,thetaorb2(1));
+deltat12(2)=timeOfFlight(ai,ei,theta2,thetaorb2(2));
 
 end
