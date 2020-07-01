@@ -1,4 +1,4 @@
-function graforbita(a,e,i,omega,w,teta_p)
+function plotorbit(a,e,i,omega,w,teta_p)
 %funzione plotta sfera e orbita. tutto espresso in km. 
 Re = 6.37e6; %raggio della terra
 figure(1);
