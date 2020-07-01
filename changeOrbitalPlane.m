@@ -30,11 +30,20 @@ u2=atan2(sinu2,cosu2)
 %trovati u1 e u2 dobbiamo torvare teta finale e wf
 if (delta_i*delta_omega)>0 || (delta_i==0 &&delta_omega>0) %se sono concordi o deltai=0 & deltaomega>0
     teta_f=u1-wi  %anomalia della manovra
+    %Ci sono due punti in cui fare la manovra, scelgo quello con delta v minore
+    if cos(teta_f)>cos(teta_f+pi)
+         teta_f=teta_f+pi;
+    end
     w_f=u2-teta_f  %arg periapsis nuovo
 else %se sono discordi o deltai=0 & deltaomega<0
     teta_f=2*pi-u1-wi
+    %Ci sono due punti in cui fare la manovra, scelgo quello con delta v minore
+    if cos(teta_f)>cos(teta_f+pi)
+         teta_f=teta_f+pi;
+    end
     w_f=2*pi-u2-teta_f
 end
+%check su
 %check sull'anomalia del perigeo
 if w_f<0
     w_f=2*pi-w_f;
