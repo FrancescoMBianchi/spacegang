@@ -1,0 +1,71 @@
+function plot_orbit(a,e,i,omega,w,theta_vera,theta_plot1,theta_plot2)
+%i theta plot sono gli estremi dell'intervallo di rappresentazione
+%dell'orbita
+%funzione plotta sfera e orbita. tutto espresso in km. 
+
+if nargin==6
+    theta_plot1=0;
+    theta_plot2=2*pi;
+end
+
+Re = 6.37e6; %raggio della terra
+figure(1);
+[x,y,z] = sphere(50); %crea tre matrici N+1 * N+1
+s = surf(Re*x/1e3,Re*y/1e3,Re*z/1e3); % create a sphere
+axis equal
+hold on
+p=a*(1-e^2); 
+
+R= [   cos(omega)*cos(w) - sin(omega)*cos(i)*sin(w), sin(omega)*cos(w) + cos(omega)*cos(i)*sin(w), sin(i)*sin(w);
+    - cos(omega)*sin(w) - sin(omega)*cos(i)*cos(w), cos(omega)*cos(i)*cos(w) - sin(omega)*sin(w), cos(w)*sin(i);
+                      sin(omega)*sin(i),                                 -cos(omega)*sin(i),            cos(i)]; %rotazione per passare da ijk a perifocale
+
+X=zeros(360,1); %vettore delle coordinate X (nel sistema il riferimento geocentrico equatoriale
+Y=zeros(360,1); %idem per coord y
+Z=zeros(360,1); %idem per coord z
+teta=(linspace(theta_plot1,theta_plot2,360))'; %vettore con i teta (discretizzo orbita)
+r=zeros(360,1); %vettore con moduli di r
+r=p./(1+e.*cos(teta)); %moduli di r
+rvect=zeros(3,360); 
+rvect(1,:)=r.*cos(teta);%tutti i re
+rvect(2,:)=r.*sin(teta);%tutti i rp
+x=zeros(3,360);
+for i=1:360
+    x(:,i)=R'*rvect(:,i); %ciclo for per i vari vettori x nel sistema di rif geoc equat
+end
+X=x(1,:);
+Y=x(2,:);
+Z=x(3,:);
+
+
+X1=zeros(360,1); %vettore delle coordinate X (nel sistema il riferimento geocentrico equatoriale
+Y1=zeros(360,1); %idem per coord y
+Z1=zeros(360,1); %idem per coord z
+teta1=(linspace(theta_plot2,2*pi+theta_plot1,360))'; %vettore con i teta (discretizzo orbita)
+r1=zeros(360,1); %vettore con moduli di r
+r1=p./(1+e.*cos(teta1)); %moduli di r
+rvect1=zeros(3,360); 
+rvect1(1,:)=r1.*cos(teta1);%tutti i re
+rvect1(2,:)=r1.*sin(teta1);%tutti i rp
+x1=zeros(3,360);
+for i=1:360
+    x1(:,i)=R'*rvect1(:,i); %ciclo for per i vari vettori x nel sistema di rif geoc equat
+end
+X1=x1(1,:);
+Y1=x1(2,:);
+Z1=x1(3,:);
+
+
+hold on
+plot3(X,Y,Z,'b')
+plot3(X1,Y1,Z1,'-- r')
+
+%plot anomalia vera 
+rvectp=zeros(3,1);
+rp=p/(1+e*cos(theta_vera));
+rvectp(1)=rp*cos(theta_vera);
+rvectp(2)=rp*sin(theta_vera);
+rvectp(3)=0;
+x=R'*rvectp;
+plot3(x(1),x(2),x(3),'o')
+end
