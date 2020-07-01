@@ -35,6 +35,10 @@ else %se sono discordi o deltai=0 & deltaomega<0
     teta_f=2*pi-u1-wi
     w_f=2*pi-u2-teta_f
 end
+%check sull'anomalia del perigeo
+if w_f<0
+    w_f=2pi-w_f;
+end
 
 vteta=((mu/p)^0.5) *(1+ei*cos(teta_f)); %vel trasversale
 deltav1=2*vteta*sin(alpha/2) %calcolo deltav
