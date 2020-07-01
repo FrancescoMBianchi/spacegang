@@ -2,10 +2,10 @@ function [dv1,dv2,dt] = trasferimento_ellittico_bitangente (a_i,e_i,w_i,a_f,e_f,
 % effettua un trasferimento ellittico bitangente per due orbite coplanari
 %INPUT:
 %a_i: semiasse maggiore orbita iniziale
-%e_i: eccentricit‡ orbita iniziale
+%e_i: eccentricit√† orbita iniziale
 %w_i: anomalia pericentro orbita iniziale
 %a_f: semiasse maggiore orbita finale
-%e_f: eccentricit‡ orbita finale
+%e_f: eccentricit√† orbita finale
 %w_f: anomalia pericentro finale
 %tipo_manovra: valore numerico che indica che tipo di manovra fare; se 0
 %parto da pericentro dell'orbita iniziale, se 1 parto da apocentro
@@ -22,36 +22,40 @@ rp_f=a_f*(1-e_f);
 mu=398600; %[km^3/s^2]
 %% calcolo delta v
 if tipo_manovra==0
-    if w_i==w_f
-        %prima manovra pericentro orbita iniziale, seconda manovra
+    if abs(w_i-w_f)<0.1
+        %prima mnovra pericentro orbita iniziale, seconda manovra
         %apocentro orbita finale
         ah=0.5*(rp_i+ra_f); %semiasse maggiore orbita di manovra
         dv1=sqrt(2*mu*(1/rp_i-1/(2*ah)))-sqrt(2*mu*(1/rp_i-1/(2*a_i)));
         dv2=sqrt(2*mu*(1/ra_f-1/(2*a_f)))-sqrt(2*mu*(1/ra_f-1/(2*ah)));
         dt=pi*sqrt((ah^3)/mu);
-    else
+    elseif abs(w_i-w_f)<(pi+0.1) && abs(w_i-w_f)>(pi-0.1)
         %prima manovra pericentro orbita iniziale, seconda manovra
         %pericentro orbita iniziale
-        ah=0.5(rp_i+rp_f);
+        ah=0.5*(rp_i+rp_f);
         dv1=sqrt(2*mu*(1/rp_i-1/(2*ah)))-sqrt(2*mu*(1/rp_i-1/(2*a_i)));
         dv2=sqrt(2*mu*(1/rp_f-1/(2*a_f)))-sqrt(2*mu*(1/rp_f-1/(2*ah)));
         dt=pi*sqrt((ah^3)/mu);
+    else
+        error('anomalia pericentro sbagliata')
+        
     end
 else
-    if w_i==w_f
+    if abs(w_i-w_f)<0.1
         %prima manovra apocentro orbita iniziale, seconda manovra
         %pericentro orbita finale
         ah=0.5*(ra_i+rp_f);
         dv1=sqrt(2*mu*(1/ra_i-1/(2*ah)))-sqrt(2*mu*(1/ra_i-1/(2*a_i)));
         dv2=sqrt(2*mu*(1/rp_f-1/(2*a_f)))-sqrt(2*mu*(1/rp_f-1/(2*ah)));
         dt=pi*sqrt((ah^3)/mu);
-    else
+    elseif abs(w_i-w_f)<(pi+0.1) && abs(w_i-w_f)>(pi-0.1)
         %prima mannovra apocentro orbita iniziale, seconda manovra
         %apocentro orbita finale
         ah=0.5*(ra_i+ra_f);
         dv1=sqrt(2*mu*(1/ra_i-1/(2*ah)))-sqrt(2*mu*(1/ra_i-1/(2*a_i)));
         dv2=sqrt(2*mu*(1/ra_f-1/(2*a_f)))-sqrt(2*mu*(1/ra_f-1/(2*ah)));
         dt=pi*sqrt((ah^3)/mu);  
+    else
+        error('anomalia pericentro sbagliata')
     end
 end
-
