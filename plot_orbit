@@ -68,4 +68,11 @@ rvectp(2)=rp*sin(theta_vera);
 rvectp(3)=0;
 x=R'*rvectp;
 plot3(x(1),x(2),x(3),'o')
+
+% segno pericentro 
+r_pericentro=[p/(1+e),0,0];
+x_pericentro=R'*r_pericentro';
+plot3(x_pericentro(1),x_pericentro(2),x_pericentro(3),'x')
+
+
 end
