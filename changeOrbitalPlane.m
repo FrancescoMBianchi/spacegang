@@ -35,6 +35,7 @@ if (delta_i*delta_omega)>0 || (delta_i==0 &&delta_omega>0) %se sono concordi o d
          teta_f=teta_f+pi;
          u1=u1+pi;
          u2=u2+pi;
+         disp('Scelto punto  di manovra più lontano')
     end
     w_f=u2-teta_f  %arg periapsis nuovo
 else %se sono discordi o deltai=0 & deltaomega<0
@@ -44,6 +45,7 @@ else %se sono discordi o deltai=0 & deltaomega<0
          teta_f=teta_f+pi;
          u1=u1+pi;
          u2=u2+pi;
+         disp('Scelto punto  di manovra più lontano')
     end
     w_f=2*pi-u2-teta_f
 end
