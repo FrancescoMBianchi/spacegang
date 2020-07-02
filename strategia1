@@ -28,44 +28,42 @@ theta_f=2.3880;
 [vect_rf,vect_vf] = rv_parametri(a_f,e_f,i_f,omega_f,w_f,theta_f);
 %% plot delle due orbite
 %figure 
+%plotto orbita di partenza
 %plot_orbit(ai,ei,ii,omegai,wi,thetai)
 %hold on
+%plotto orbita di arrivo
 %plot_orbit(a_f,e_f,i_f,omega_f,w_f,theta_f)
-%% cambio orbital plane
-%deltav1: deltav necessario per la manovra di cambio del orbital plane [km/s]
+%% cambio di inclinazione
+%deltav1: deltav necessario per la manovra di cambio di inclinazione [km/s^2]
 %w2: anomalia del pericentro della nuova orbita [rad]
+%theta2: punto di manovra
 %deltat12: tempo che interccorre tra punto iniziale e punto di manovra per
-%il cambio orbital plane [s
-%theta2 anomalia vera manovra
+%il cambio S.R. [s]
 [deltav1,w2,theta2] = changeOrbitalPlane(ai,ei,ii,omegai,wi,i_f,omega_f);
 deltat12=timeOfFlight(ai,ei,thetai,theta2);
-theta2
-deltav1
-deltat12
+
 %% cambio anomalia pericentro
 %deltav2: delta v necessario per la manovra di cambio anomalia del
 %pericentro
 %w3: anomalia del pericentro dell'orbita dopo la manovra
-%vect_theta3: è un vettore riga che contiene le due anomalie vere (sfasate di pi) in cui è possibile
+%vect_theta3: è un vettore riga che contiene le due anomalie (sfasate di pi) in cui è possibile
 %fare la manovra;
 %deltat23: vettore riga che contiene l'intervallo di tempo che intercorre
-%tra punto di manovra di cambio orbital plane (2) a quello di cambio anomalia (3);
+%tra punto di manovra di cambio S.R (2) a quello di cambio anomalia (3);
 %vettore riga perchè come detto prima ci sono due nodi in cui poter fare la
 %manovra
-[deltav2,w3,vect_theta3,deltat23] = changePeriapsisArg(ai,ei,w2,theta2,w_f);
-deltav2
-w3
-deltat23
-%% cambio forma partendo da pericentro --> manovra bitangente (due impulsi)
+[deltav2,w3,vect_theta3,deltat23,vect_thetaplot3] = changePeriapsisArg(ai,ei,w2,theta2,w_f);
+
+%% cambio forma partendo da pericentro --> manovra biellittica (due impulsi)
 %deltav3_p: delta v del primo impulso, il pedice _p nella notazione indica
-%che il primo impulso è fatto al pericentro
+%che il primo impukso è fatto al pericentro
 %deltav4_p: delta v secondo impulso
 %deltat34_p: tempo di manovra che intercorre tra il punto 3 (punto di
 %cambio anomalia del pericentro) e il punto quattro (punto di arrivo
-%manovra bitangente); è un vettore di due componenti perchè non abbiamo
+%manovra biellittica); è un vettore di due componenti perchè non abbiamo
 %ancora deciso in quale dei due punti sfasati di pi fare la manovra di
 %cambio piano
-%theta4_p: angolo in cui termina la manovra bitangente; sarà apogeo o
+%theta4_p: angolo in cui termina la manovra biellittica; sarà apogeoo
 %perigeo
 %ah_p: semiasse maggiore orbita di trasferimento
 %eh_p: eccentricità orbita di trasferimento
@@ -83,9 +81,11 @@ deltat4f_p=timeOfFlight(a_f,e_f,theta4_p,theta_f); %tempo che intercorre dal pun
 if deltat24_p(1)<deltat24_p(2)
     theta3_p=vect_theta3(1); %scegliamo come anomalia vera il primo elemento del vettore contenente i due punti di manovra
     deltat_p=[deltat12,deltat23(1),deltat34_p(1),delta4tf_p]; %vettore che conitene i tempi di manovra
+    thetaplot3_p=vect_thetaplot3(1);
 else
     theta3_p=vect_theta3(2); %scegliamo come anomalia vera il secondo elemento del vettore contenente i due punti di manovra
     deltat_p=[deltat12,deltat23(2),deltat34_p(2),deltat4f_p];
+    thetaplot3_p=vect_thetaplot3(2);
 end
  
 %% cambio forma partendo da apocentro --> manovra biellittica (due impulsi)
@@ -96,12 +96,14 @@ end
 deltav_a=[deltav1,deltav2,deltav3_a,deltav4_a];
 deltat24_a=deltat23+deltat34_a;
 deltat4f_a=timeOfFlight(a_f,e_f,theta4_a,theta_f);
-if deltat24_a(2)<deltat24_a(2)
+if deltat24_a(1)<deltat24_a(2)
     theta3_a=vect_theta3(1);
     deltat_a=[deltat12,deltat23(1),deltat34_a(1),delta4f_a];
+    thetaplot3_a=vect_thetaplot3(1);
 else
-    theta3_a=vect_theta3(1);
+    theta3_a=vect_theta3(2);
     deltat_a=[deltat12,deltat23(2),deltat34_a(2),deltat4f_a];
+    thetaplot3_a=vect_thetaplot3(2);
 end
 
 deltavtot_p=sum(abs(deltav_p)) % deltav totale con cambio di forma che inizia nel perigeo
@@ -110,23 +112,33 @@ deltattot_p=sum(deltat_p) %deltat totale con cambio di forma che inizia nel peri
 deltattot_a=sum(deltat_a) %deltat totale con cambio di forma che inizia nell'apogeo
 
 %% plot manovre con cambio di forma al pericentro
-figure
+%plotto orbita iniziale
 plot_orbit(ai,ei,ii,omegai,wi,thetai)
 hold on
-% plot_orbit(a_f,e_f,i_f,omega_f,w_f,theta_f)
-plot_orbit(ai,ei,i_f,omega_f,w2,theta2,theta2,theta3_p)
-figure
+% plotto da punto cambio plano a punto di cambio anomalia pericentro
+plot_orbit(ai,ei,i_f,omega_f,w2,theta2,theta2,thetaplot3_p)
+%plotto da punto cambio anomalia pericentro a punto inizio manovra
+%bitagente
 plot_orbit(ai,ei,i_f,omega_f,w3,theta3_p,theta3_p,2*pi)
-plot_orbit(ah_p,eh_p,i_f,omega_f,w3,0,0,theta4_p)
-%plot_orbit(a_f,e_f,i_f,omega_f,w_f,theta4_p,theta4_p,theta_f)
+%plotto orbita trasferimento della manovra bitangente
+plot_orbit(ah_p,eh_p,i_f,omega_f,w3,0,0,pi)
+%plotto tratto che va da fine punto di manovra bitangente a punto finale
+%orbitra
+plot_orbit(a_f,e_f,i_f,omega_f,w_f,theta4_p,theta4_p,theta_f)
+
 
 
 %% plot manovra con cambio di forma all'apocentro
-%figure (3)
-%plot_orbit(ai,ei,ii,omegai,wi,thetai)
+%plotto orbita iniziale
+plot_orbit(ai,ei,ii,omegai,wi,thetai)
 %hold on
-%plot_orbit(a_f,e_f,i_f,omega_f,w_f,theta_f)
-%plot_orbit(ai,ei,i_f,omega_f,w2,theta2,theta2,theta3_a)
-%plot_orbit(ai,ei,i_f,omega_f,w3,theta3_a,theta3_a,pi)
-%plot_orbit(ah_a,eh_a,i_f,omega_f,w3,pi,pi,0)
-%plot_orbit(a_f,e_f,i_f,omega_f,w_f,theta4_a,theta4_a,theta_f)
+% plotto da punto cambio plano a punto di cambio anomalia pericentro
+plot_orbit(ai,ei,i_f,omega_f,w2,theta2,theta2,thetaplot3_a)
+%plotto da punto cambio anomalia pericentro a punto inizio manovra
+%bitagente
+plot_orbit(ai,ei,i_f,omega_f,w3,theta3_a,theta3_a,pi)
+%plotto orbita trasferimento della manovra bitangente
+plot_orbit(ah_a,eh_a,i_f,omega_f,w3+pi,0,0,pi)
+%plotto tratto che va da fine punto di manovra bitangente a punto finale
+%orbitra
+plot_orbit(a_f,e_f,i_f,omega_f,w_f,theta4_a,-theta4_a,theta_f)
