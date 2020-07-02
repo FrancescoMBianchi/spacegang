@@ -24,7 +24,7 @@ mu=398600; %[km^3/s^2]
 %% calcolo delta v
 if tipo_manovra==0
     if abs(w_i-w_f)<0.1
-        %prima mnovra pericentro orbita iniziale, seconda manovra
+        %prima manovra pericentro orbita iniziale, seconda manovra
         %apocentro orbita finale
         ah=0.5*(rp_i+ra_f); %semiasse maggiore orbita di manovra
         dv1=sqrt(2*mu*(1/rp_i-1/(2*ah)))-sqrt(2*mu*(1/rp_i-1/(2*a_i)));
@@ -43,7 +43,7 @@ if tipo_manovra==0
         dv2=sqrt(2*mu*(1/rp_f-1/(2*a_f)))-sqrt(2*mu*(1/rp_f-1/(2*ah)));
         dtm=pi*sqrt((ah^3)/mu);
         dt=timeOfFlight(a_i,e_i,theta_i,0)
-        theta_f=pi;
+        theta_f=0;
         eh=(rp_f-rp_i)/(rp_f+rp_i);
         wh=w_i;
     else
@@ -71,12 +71,11 @@ else
         dt=pi*sqrt((ah^3)/mu);  
         dtm=timeOfFlight(a_i,e_i,theta_i,pi);
         theta_f=pi;
-        eh=(ra_i-ra_f)/(ra_i+ra_f);
-        wh=w_f;
+        eh=abs(ra_i-ra_f)/(ra_i+ra_f);
+        wh=w_f+pi;
     else
         error('anomalia pericentro sbagliata')
     end
 end
 dt_t=dtm+dt;    
 end
-
