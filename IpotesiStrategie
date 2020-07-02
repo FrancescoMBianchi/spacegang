@@ -10,6 +10,8 @@ ho quindi due bifocarzioni:
     (potrebbe essere gestito con un ulteriore cambio forma).
     2)scelta omega ausiliaria=omega iniziale+pi ==> manovra apocentro apocentro, risulta sconveniente rispetto alla 1 sia per il change shape che per il cambio piano (5.7 di deltav).
     
+    Ma attenzione! What if: cambiamo l'argomento del perigeo coem prima manovra? il problema è che il cambio piano cambia l'arg del perigeo ma il grosso vantaggio è che se lo si fa in un orbita quasi circolare costa davvero poco. Bisogna trovare il delta arg perigeo da dare all'inizio in modo che l'arg del perigeo finale 
+    
     
     
     
