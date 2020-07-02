@@ -33,6 +33,8 @@ if (delta_i*delta_omega)>0 || (delta_i==0 &&delta_omega>0) %se sono concordi o d
     %Ci sono due punti in cui fare la manovra, scelgo quello con delta v minore
     if cos(teta_f)>cos(teta_f+pi)
          teta_f=teta_f+pi;
+         u1=u1+pi;
+         u2=u2+pi;
     end
     w_f=u2-teta_f  %arg periapsis nuovo
 else %se sono discordi o deltai=0 & deltaomega<0
@@ -40,6 +42,8 @@ else %se sono discordi o deltai=0 & deltaomega<0
     %Ci sono due punti in cui fare la manovra, scelgo quello con delta v minore
     if cos(teta_f)>cos(teta_f+pi)
          teta_f=teta_f+pi;
+         u1=u1+pi;
+         u2=u2+pi;
     end
     w_f=2*pi-u2-teta_f
 end
