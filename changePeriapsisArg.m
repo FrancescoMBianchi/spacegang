@@ -1,5 +1,5 @@
 
-function [deltav2,omega3,theta3,deltat12] = changePeriapsisArg(ai,ei,omega2,theta2,omegaf);
+function [deltav2,omega3,theta3,deltat12,thetaorb2] = changePeriapsisArg(ai,ei,omega2,theta2,omegaf);
 
 if abs(omegaf-omega2)>pi/2 && abs(omegaf-omega2)<3/2*pi    
     omega3=omegaf+pi;
@@ -24,3 +24,4 @@ deltat12(1)=timeOfFlight(ai,ei,theta2,thetaorb2(1));
 deltat12(2)=timeOfFlight(ai,ei,theta2,thetaorb2(2));
 
 end
+%thetaorb2 vettore che serve per plot orbita tra theta 
