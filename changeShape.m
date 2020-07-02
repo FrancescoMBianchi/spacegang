@@ -2,11 +2,11 @@ function [dv1,dv2,dt_t,theta_f,ah,eh,wh] = changeShape (a_i,e_i,w_i,a_f,e_f,w_f,
 % effettua un trasferimento ellittico bitangente per due orbite coplanari
 %INPUT:
 %a_i: semiasse maggiore orbita iniziale
-%e_i: eccentricit‡ orbita iniziale
+%e_i: eccentricit√† orbita iniziale
 %w_i: anomalia pericentro orbita iniziale
 %theta_i: angolo di inzio manovra
 %a_f: semiasse maggiore orbita finale
-%e_f: eccentricit‡ orbita finale
+%e_f: eccentricit√† orbita finale
 %w_f: anomalia pericentro finale
 %tipo_manovra: valore numerico che indica che tipo di manovra fare; se 0
 %parto da pericentro dell'orbita iniziale, se 1 parto da apocentro
@@ -79,4 +79,3 @@ else
 end
 dt_t=dtm+dt;    
 end
-
