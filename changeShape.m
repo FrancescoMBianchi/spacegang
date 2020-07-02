@@ -37,7 +37,7 @@ if tipo_manovra==0
         
     elseif abs(w_i-w_f)<(pi+0.1) && abs(w_i-w_f)>(pi-0.1)
         %prima manovra pericentro orbita iniziale, seconda manovra
-        %pericentro orbita iniziale
+        %pericentro orbita finale
         ah=0.5*(rp_i+rp_f);
         dv1=sqrt(2*mu*(1/rp_i-1/(2*ah)))-sqrt(2*mu*(1/rp_i-1/(2*a_i)));
         dv2=sqrt(2*mu*(1/rp_f-1/(2*a_f)))-sqrt(2*mu*(1/rp_f-1/(2*ah)));
@@ -79,3 +79,4 @@ else
 end
 dt_t=dtm+dt;    
 end
+
