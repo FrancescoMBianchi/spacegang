@@ -1,5 +1,10 @@
 -Usare il cambio piano per modificare completamente o in parte l'anomalia del pericentro
--
+-Pplotatto orbita iniziale e finale sullo stesos piano con stessa anomalia di pericentro, ci siamo accorti che si potrebbe fare prima cambio forma (da pericentro iniziale a apocentro finale con omega piccolo uguale, il secondo burn verrebbe piccolino) poi nell'apocentro dell'orbita finale (forse combinando le manovre vettorialmente) posso fare cambio inclinazione ma non cambio omega grande. quindi o faccio prima cambio inclinazione e poi in un secondo punto cambio omega grande con deltai=0, o faccio la classica manovra cambio piano nel punto (dei due disponibili) più vicino all'apocentro dell'orbita finale (o di quella di supporto).
+ho quindi due bifocarzioni:
+    -1 scelta del nuovo w quando faccio cambio forma (uguale o +pi)
+    -2 scelta manovra cambio piano se separata in cambio e i e cambio RAAN o tutto uguale.
+    
+    La manovra cambio piano va fatta nel punto più lento possibile
 
 
 Cose da scrivere che abbiamo fatto
