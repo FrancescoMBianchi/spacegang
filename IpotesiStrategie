@@ -4,6 +4,15 @@ ho quindi due bifocarzioni:
     -1 scelta del nuovo w quando faccio cambio forma (uguale o +pi)
     -2 scelta manovra cambio piano se separata in cambio e i e cambio RAAN o tutto uguale.
     
+    possibilità biforcazione 1:
+    1)scelta di omega ausiliaria uguale a omega iniziale ==> manovra pericentro apocentro.
+    Questo porta dispendio basso di deltav per cambio piano (3.7) ma dà differenza di w molto grande, il che porta a dispendio oneroso per rotazione asse maggiore deltav=1.55 con changeperiaspis
+    (potrebbe essere gestito con un ulteriore cambio forma).
+    2)scelta omega ausiliaria=omega iniziale+pi ==> manovra apocentro apocentro, risulta sconveniente rispetto alla 1 sia per il change shape che per il cambio piano (5.7 di deltav).
+    
+    
+    
+    
     La manovra cambio piano va fatta nel punto più lento possibile
 
 
