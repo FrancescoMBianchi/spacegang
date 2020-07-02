@@ -57,8 +57,8 @@ Z1=x1(3,:);
 
 
 hold on
-plot3(X,Y,Z,'b')
-plot3(X1,Y1,Z1,'-- r')
+plot3(X,Y,Z)
+plot3(X1,Y1,Z1,'--')
 
 %plot anomalia vera 
 rvectp=zeros(3,1);
