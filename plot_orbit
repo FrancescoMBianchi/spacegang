@@ -57,7 +57,7 @@ Z1=x1(3,:);
 
 
 hold on
-plot3(X,Y,Z)
+plot3(X,Y,Z,'LineWidth',1.32)
 plot3(X1,Y1,Z1,'--')
 
 %plot anomalia vera 
