@@ -1,5 +1,6 @@
 clear
 clc
+close all
 %% caratterizzazione orbita iniziale
 % vect_ri: vettore posizione iniziale [km]
 % vect_vi: vettore velocità iniziale [km/s]
@@ -7,7 +8,7 @@ clc
 vect_ri=[-5183.4184 6189.4459 4384.1737];
 vect_vi=[-5.3130 -4.3350 0.2136];
 
-[vect_ei,ei,ai,omegai,ii,wi,thetai,vect_hi,vect_ni] = parametri_rv(vect_ri,vect_vi)
+[vect_ei,ei,ai,omegai,ii,wi,thetai,vect_hi,vect_ni] = parametri_rv(vect_ri,vect_vi);
 %% caratterizzazione orbita finale
 % vect_e: vettore eccentricità
 % e: eccentricità
@@ -24,43 +25,47 @@ omega_f=1.8790;
 w_f=2.4080;
 theta_f=2.3880;
 
-[vect_rf,vect_vf] = rv_parametri(a_f,e_f,i_f,omega_f,w_f,theta_f)
+[vect_rf,vect_vf] = rv_parametri(a_f,e_f,i_f,omega_f,w_f,theta_f);
 %% plot delle due orbite
 %figure 
 %plot_orbit(ai,ei,ii,omegai,wi,thetai)
 %hold on
 %plot_orbit(a_f,e_f,i_f,omega_f,w_f,theta_f)
-%% cambio inclinazione
-%deltav1: deltav necessario per la manovra di cambio di inclinazione [km/s^2]
+%% cambio orbital plane
+%deltav1: deltav necessario per la manovra di cambio del orbital plane [km/s]
 %w2: anomalia del pericentro della nuova orbita [rad]
-%theta2: punto di manovra
 %deltat12: tempo che interccorre tra punto iniziale e punto di manovra per
-%il cambio S.R. [s]
-[deltav1,w2,theta2] = changeOrbitalPlane(ai,ei,ii,omegai,wi,i_f,omega_f)
+%il cambio orbital plane [s
+%theta2 anomalia vera manovra
+[deltav1,w2,theta2] = changeOrbitalPlane(ai,ei,ii,omegai,wi,i_f,omega_f);
 deltat12=timeOfFlight(ai,ei,thetai,theta2);
-
+theta2
+deltav1
+deltat12
 %% cambio anomalia pericentro
 %deltav2: delta v necessario per la manovra di cambio anomalia del
 %pericentro
 %w3: anomalia del pericentro dell'orbita dopo la manovra
-%vect_theta3: è un vettore riga che contiene le due anomalie (sfasate di pi) in cui è possibile
+%vect_theta3: è un vettore riga che contiene le due anomalie vere (sfasate di pi) in cui è possibile
 %fare la manovra;
 %deltat23: vettore riga che contiene l'intervallo di tempo che intercorre
-%tra punto di manovra di cambio S.R (2) a quello di cambio anomalia (3);
+%tra punto di manovra di cambio orbital plane (2) a quello di cambio anomalia (3);
 %vettore riga perchè come detto prima ci sono due nodi in cui poter fare la
 %manovra
 [deltav2,w3,vect_theta3,deltat23] = changePeriapsisArg(ai,ei,w2,theta2,w_f);
-
-%% cambio forma partendo da pericentro --> manovra biellittica (due impulsi)
+deltav2
+w3
+deltat23
+%% cambio forma partendo da pericentro --> manovra bitangente (due impulsi)
 %deltav3_p: delta v del primo impulso, il pedice _p nella notazione indica
-%che il primo impukso è fatto al pericentro
+%che il primo impulso è fatto al pericentro
 %deltav4_p: delta v secondo impulso
 %deltat34_p: tempo di manovra che intercorre tra il punto 3 (punto di
 %cambio anomalia del pericentro) e il punto quattro (punto di arrivo
-%manovra biellittica); è un vettore di due componenti perchè non abbiamo
+%manovra bitangente); è un vettore di due componenti perchè non abbiamo
 %ancora deciso in quale dei due punti sfasati di pi fare la manovra di
 %cambio piano
-%theta4_p: angolo in cui termina la manovra biellittica; sarà apogeoo
+%theta4_p: angolo in cui termina la manovra bitangente; sarà apogeo o
 %perigeo
 %ah_p: semiasse maggiore orbita di trasferimento
 %eh_p: eccentricità orbita di trasferimento
@@ -105,13 +110,14 @@ deltattot_p=sum(deltat_p) %deltat totale con cambio di forma che inizia nel peri
 deltattot_a=sum(deltat_a) %deltat totale con cambio di forma che inizia nell'apogeo
 
 %% plot manovre con cambio di forma al pericentro
-figure (2)
+figure
 plot_orbit(ai,ei,ii,omegai,wi,thetai)
 hold on
-%plot_orbit(a_f,e_f,i_f,omega_f,w_f,theta_f)
+% plot_orbit(a_f,e_f,i_f,omega_f,w_f,theta_f)
 plot_orbit(ai,ei,i_f,omega_f,w2,theta2,theta2,theta3_p)
-plot_orbit(ai,ei,i_f,omega_f,w3,theta3_p,theta3_p,0)
-%plot_orbit(ah_p,eh_p,i_f,omega_f,w3,0,0,theta4_p)
+figure
+plot_orbit(ai,ei,i_f,omega_f,w3,theta3_p,theta3_p,2*pi)
+plot_orbit(ah_p,eh_p,i_f,omega_f,w3,0,0,theta4_p)
 %plot_orbit(a_f,e_f,i_f,omega_f,w_f,theta4_p,theta4_p,theta_f)
 
 
@@ -124,4 +130,3 @@ plot_orbit(ai,ei,i_f,omega_f,w3,theta3_p,theta3_p,0)
 %plot_orbit(ai,ei,i_f,omega_f,w3,theta3_a,theta3_a,pi)
 %plot_orbit(ah_a,eh_a,i_f,omega_f,w3,pi,pi,0)
 %plot_orbit(a_f,e_f,i_f,omega_f,w_f,theta4_a,theta4_a,theta_f)
-
