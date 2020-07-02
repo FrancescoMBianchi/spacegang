@@ -30,9 +30,10 @@ theta_f=2.3880;
 %plot_orbit(ai,ei,ii,omegai,wi,thetai)
 %hold on
 %plot_orbit(a_f,e_f,i_f,omega_f,w_f,theta_f)
-%% cambio S.R.
-%deltav1: deltav necessario per la manovra di cambio del S.R. [km/s^2]
+%% cambio inclinazione
+%deltav1: deltav necessario per la manovra di cambio di inclinazione [km/s^2]
 %w2: anomalia del pericentro della nuova orbita [rad]
+%theta2: punto di manovra
 %deltat12: tempo che interccorre tra punto iniziale e punto di manovra per
 %il cambio S.R. [s]
 [deltav1,w2,theta2] = changeOrbitalPlane(ai,ei,ii,omegai,wi,i_f,omega_f)
