@@ -1,3 +1,4 @@
+
 clear
 clc
 
@@ -34,26 +35,60 @@ plot_orbit(a_f,e_f,i_f,omega_f,w_f,theta_f)
 %% cambio forma partendo da pericentro (con w_f=w_i)
 
 k=0;
-deltavvect=zeros(1,6284);
-for w_ciclo=wi-pi/2:0.001:wi+pi/2 
-k=k+1;
-[deltav1,omega3,theta3,deltat12,thetaorb2] = changePeriapsisArg(ai,ei,wi,0,w_ciclo);
 
-[deltav21,deltav22,deltat,theta_f,ah,eh,wh]=changeShape (ai,ei,w_ciclo,a_f,e_f,w_ciclo,theta3(1),0);
+for w_ciclo=3.311:0.001:2*pi 
+k=k+1;
+[deltav1,w_0,theta3,deltat12,thetaorb2,delta_w1] = changePeriapsisArg(ai,ei,wi,0,w_ciclo);
+
+[deltav21,deltav22,deltat,theta_f,ah,eh,wh]=changeShape (ai,ei,w_ciclo,a_f,e_f,w_ciclo,theta3(1),1);
 
 [deltav3,w_daplottare,tetaout]=changeOrbitalPlane(a_f,e_f,ii,omegai,w_ciclo,i_f,omega_f);
 
-[deltav4,omega3,theta3,deltat12,thetaorb2] = changePeriapsisArg(a_f,e_f,w_daplottare,0,w_f);
+[deltav4,w_3,theta3,deltat12,thetaorb2,delta_wf] = changePeriapsisArg(a_f,e_f,w_daplottare,0,w_f);
 
 w_vectfinale(k)=w_daplottare;
-deltavvect(k)=abs(deltav3)+abs(deltav1)+abs(deltav21)+abs(deltav22);
-
+deltavvect(k)=abs(deltav3)+abs(deltav1)+abs(deltav21)+abs(deltav22)+abs(deltav4);
+delta_wfvect(k)=delta_wf;
+w_3vect(k)=w_3;
 end
+w_iniziale=[0:0.001:2*pi];
 w_differenza=w_vectfinale-w_f;
 plot(w_differenza,'b')
 hold on
 plot(deltavvect,'r')
+%plot(delta_wfvect,'g')
+%plot(w_3vect,'y')
+xlabel('')
+ylabel('')
 
+%% cambio forma partendo da apocentro (con w_f=w_i+pi)
+
+k=0;
+
+for w_ciclo=0.674:0.001:2*pi 
+k=k+1;
+[deltav1,w_0,theta3,deltat12,thetaorb2,delta_w1] = changePeriapsisArg(ai,ei,wi,0,w_ciclo);
+
+[deltav21,deltav22,deltat,theta_f,ah,eh,wh]=changeShape (ai,ei,w_ciclo,a_f,e_f,w_ciclo+pi,theta3(1),1);
+
+[deltav3,w_daplottare,tetaout]=changeOrbitalPlane(a_f,e_f,ii,omegai,w_ciclo+pi,i_f,omega_f);
+
+[deltav4,w_3,theta3,deltat12,thetaorb2,delta_wf] = changePeriapsisArg(a_f,e_f,w_daplottare,0,w_f);
+
+w_vectfinale(k)=w_daplottare;
+deltavvect(k)=abs(deltav3)+abs(deltav1)+abs(deltav21)+abs(deltav22)+abs(deltav4);
+delta_wfvect(k)=delta_wf;
+w_3vect(k)=w_3;
+end
+w_iniziale=[0:0.001:2*pi];
+w_differenza=w_vectfinale-w_f;
+plot(w_differenza,'b')
+hold on
+plot(deltavvect,'r')
+%plot(delta_wfvect,'g')
+%plot(w_3vect,'y')
+xlabel('')
+ylabel('')
 
 
 
