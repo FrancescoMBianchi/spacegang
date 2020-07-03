@@ -5,7 +5,7 @@ close all
 % vect_ri: vettore posizione iniziale [km]
 % vect_vi: vettore velocità iniziale [km/s]
 
-vect_ri=[-5183.4184 6189.4459 4384.1737];
+vect_ri=[-5183.4184 6189.4459 4334.1737];
 vect_vi=[-5.3130 -4.3350 0.2136];
 
 [vect_ei,ei,ai,omegai,ii,wi,thetai,vect_hi,vect_ni] = parametri_rv(vect_ri,vect_vi);
